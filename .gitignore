@@ -6,6 +6,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Database
+*.sqlite3
+
+# Text backup files
+*.bak
+
 # C extensions
 *.so
 
