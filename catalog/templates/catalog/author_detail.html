@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Author: {{ author }}</h1>
+  {% if perms.catalog.change_author %}
+    <a class="btn btn-primary" href="{% url 'author_update' author.pk %}" role="button">Edit</a>
+  {% endif %}
+
+  <br><br>
+  <p><strong>
+  {{ author.date_of_birth|default:"" }}
+  {% if author.date_of_death is not None %}- {{ author.date_of_death }}{% endif %}
+  </strong></p>
+
+  <div style="margin-left:20px;margin-right:100px">
+    <h4>Books</h4>
+    {% for book in author.book_set.all %}
+      <hr>
+      <p><strong>
+      <a href="{{ book.get_absolute_url }}">{{ book }}
+      </a> ({{ book.bookinstance_set.all.count }} copies)</p></strong>
+      <p> {{ book.summary|truncatewords:50 }} </p>
+    {% endfor %}
+  </div>
+{% endblock %}
